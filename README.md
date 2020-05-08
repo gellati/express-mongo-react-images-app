@@ -1,14 +1,14 @@
-# Image server with Express, MongoDB and React
+# Image app with Express, MongoDB and React
 
 This project features an image application. Users can view images, and give likes to images. When clicking on an image, the users can also comment on the images.
 
-The application consists of three microservices, each located in its own folder. In the `mongo` folder there is a [Mongo](https://www.mongodb.com/) database containing image related data, and the `backend` folder has an [Express](https://expressjs.com/) server which is the backend through which images are served. The `client` folder contains the front end code written in [React](https://www.mongodb.com/). All are instantiated with [Docker](docker.com/) using [Docker Compose](https://github.com/docker/compose).
+The application consists of three microservices, each located in its own folder. In the `mongo` folder there is a [Mongo](https://www.mongodb.com/) database containing image related data, and the `backend` folder has an [Express](https://expressjs.com/) server which is the backend through which image data is served. The `client` folder contains the front end code written in [React](https://www.mongodb.com/). Containers for all services are instantiated with [Docker](docker.com/) using [Docker Compose](https://github.com/docker/compose).
 
-In addition there is a mongo-seed microservice, which starts a temporary container which only populates the mongo database and then stops.
+In addition there is a mongo-seed microservice, which starts a temporary container whose only task is to populate the mongo database and then quit.
 
 ## Setup
 
-Prepare an `.env` file as described in the section on environment variables. Then run
+Prepare an `.env` file as described in the [section on environment variables](#environment-variables). Then run
 
     docker-compose build
 
