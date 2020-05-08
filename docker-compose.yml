@@ -1,0 +1,55 @@
+version: '2'
+
+services:
+    mongo:
+        build:
+            context: mongo
+            dockerfile: Dockerfile
+        environment:
+            - MONGO_URI=${MONGO_URI}
+            - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+        ports:
+            - '27017:27017'
+
+    mongo-seed:
+        build:
+            context: ./mongo-seed
+            dockerfile: Dockerfile
+        depends_on:
+            - mongo
+        restart: on-failure
+
+    backend:
+        build:
+            context: backend
+            dockerfile: Dockerfile
+        environment:
+            - MONGO_URI=${MONGO_URI}
+            - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+            - BACKEND_PORT=${BACKEND_PORT}
+        depends_on:
+            - mongo
+            - mongo-seed
+        ports:
+            - '3000:3000'
+        volumes:
+            - './backend:/app'
+
+    client:
+        build:
+            context: client
+            dockerfile: Dockerfile
+        environment:
+            - CLIENT_PORT=${CLIENT_PORT}
+            - CLIENT_HOST=${CLIENT_HOST}
+        depends_on:
+           - mongo
+           - backend
+        ports:
+            - '3002:3002'
+        volumes:
+            - './client:/app'

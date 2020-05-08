@@ -1,0 +1,43 @@
+{
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ],
+    "env": {
+      "development": {
+        "plugins": [
+          [
+            "@babel/plugin-proposal-object-rest-spread"
+          ],
+          [
+            "@babel/plugin-transform-react-display-name"
+          ],
+          [
+            "transform-class-properties"
+          ],
+          [
+            "babel-plugin-stylus-compiler"
+          ],
+          [ "react-hot-loader/babel"],
+          ["@babel/plugin-transform-runtime", {"regenerator": true}]
+        ]
+      },
+      "production": {
+        "plugins": [
+          [
+            "@babel/plugin-proposal-object-rest-spread"
+          ],
+          [
+            "@babel/plugin-transform-react-display-name"
+          ],
+          [
+            "transform-class-properties"
+          ],
+          [
+            "babel-plugin-stylus-compiler"
+          ],
+          [ "react-hot-loader/babel"]
+        ]
+      }
+    }
+}
